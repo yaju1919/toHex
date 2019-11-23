@@ -56,7 +56,6 @@
         input_key = yaju1919.appendInputNumber(h,{
             title: "暗号化キー",
             width: "5em",
-            save: "key",
             max: BIG_NUMBER,
             min: -BIG_NUMBER,
             value: 0,
@@ -70,7 +69,6 @@
         input_reverse = yaju1919.appendInputNumber(h,{
             title: "反転キー",
             width: "5em",
-            save: "reverse_key",
             max: 1000,
             min: 2,
             value: 2,
