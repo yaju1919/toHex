@@ -42,6 +42,7 @@
     appendBtn("暗号化", () => result(encode(input(),input_key())));
     appendBtn("復元", () => result(decode(input(),input_key())));
     h.append("<br>");
+    h.append("<br>");
     yaju1919.appendCheckButton(h,{
         title: "オプション機能",
         change: f => f ? h_opt.show() : h_opt.hide()
@@ -80,7 +81,6 @@
     //------------------------------------------------------------------------------------------------
     //------------------------------------------------------------------------------------------------
     h.append("<br>");
-    h.append("<br>");
     const input = yaju1919.appendInputText(h,{
         placeholder: "暗号化 or 復元したい文章をここに入力してください。",
         width: "50%",
@@ -95,7 +95,7 @@
         return false;
     });
     h.append("<br>");
-    h.append("結果　");
+    h.append("▼結果　");
     appendBtn("コピー", () => {
         yaju1919.copy(result_elm.text().trim());
     });
