@@ -3,8 +3,8 @@
     const yaju1919 = yaju1919_library;
     const unit = 4; // 単位文字数
     const shape0 = (n,str) => ("0".repeat(n) + str).slice(-n).toUpperCase(); // strを左から0詰めでn文字に整形
-    const encode = (str, key = 0) => insert_space(r(str.trim().replace(/(.|\n)/g, c => shape0(unit,overflow(Number(c.charCodeAt(0)) + key).toString(16).slice(-unit)))));
-    const decode = (str, key = 0) => r(str.replace(/[^0-9A-Fa-f]/g,"")).replace(new RegExp("[0-9A-Fa-f]{" + unit + "}", "g"), n => String.fromCharCode(overflow(parseInt(n, 16) - key)));
+    const encode = (str, key = 0) => insert_space(r(str.trim().replace(/(.|\n)/g, c => shape0(unit,Number(c.charCodeAt(0)) + key).toString(16).slice(-unit))));
+    const decode = (str, key = 0) => r(str.replace(/[^0-9A-Fa-f]/g,"")).replace(new RegExp("[0-9A-Fa-f]{" + unit + "}", "g"), n => String.fromCharCode(parseInt(n, 16) - key));
 
     const reverse = str => str.split('').reverse().join(''); // 文字列の反転
     const r = str => {
@@ -18,14 +18,6 @@
         if(!space_flag()) return str;
         return str.match(/.{2}/g).map(v=>v+" ").join('');
     }
-
-    const OVERFLOW_NUMBER = 16 ** unit; // 16進数がunit文字 オーバーフローする数値
-    const BIG_NUMBER = 16 ** 8; // とりあえず大きい数値
-
-    const overflow = n => (BIG_NUMBER + n) % OVERFLOW_NUMBER;
-
-    const isHex = v => !/[^0-9A-Fa-f ]/.test(v); // 16進数かどうか
-
 
     const h = $("<div>").appendTo($("body")).css({
         padding: "1em"
@@ -74,8 +66,6 @@
     const input_key = yaju1919.appendInputNumber(h_opt,{
         title: "暗号化キー",
         width: "5em",
-        max: BIG_NUMBER,
-        min: -BIG_NUMBER,
         value: 0,
         int: true
     });
