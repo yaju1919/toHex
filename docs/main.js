@@ -31,6 +31,21 @@
         padding: "1em"
     });
     $("<h1>",{text:"文字列を16進数に暗号化"}).appendTo(h);
+    $("<div>",{text:"F2,F4,F7,F8,F9,F10,Altキーに復元ボタンが割り当てられています。"}).appendTo(h);
+    $("<div>",{text:"暗号化キーを上下しつつ復元する総当たり作業用にお使いください。"}).appendTo(h);
+    window.addEventListener("keydown", e=>{
+        switch(e.key){
+            case 'F2':
+            case 'F4':
+            case 'F7':
+            case 'F8':
+            case 'F9':
+            case 'F10':
+            case 'Alt':
+                btn.click();
+                break;
+        }
+    });
     const textarea = () => h.find("textarea");
     //------------------------------------------------------------------------------------------------
     const appendBtn = (title, func) => $("<button>",{text: title}).appendTo(h).click(func);
@@ -40,7 +55,7 @@
         appendBtn("貼り付け", () => navigator.clipboard.readText().then(text=>textarea().val(text)));
     })();
     appendBtn("暗号化", () => result(encode(input(),input_key())));
-    appendBtn("復元", () => result(decode(input(),input_key())));
+    const btn = appendBtn("復元", () => result(decode(input(),input_key())));
     h.append("<br>");
     h.append("<br>");
     yaju1919.appendCheckButton(h,{
