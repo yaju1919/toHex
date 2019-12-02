@@ -46,6 +46,7 @@
         title: "オプション機能",
         change: f => f ? h_opt.show() : h_opt.hide()
     });
+    h.append("<br>");
     //------------------------------------------------------------------------------------------------
     //------------------------------------------------------------------------------------------------
     const h_opt = $("<div>").appendTo(h).hide();
@@ -79,6 +80,7 @@
     //------------------------------------------------------------------------------------------------
     //------------------------------------------------------------------------------------------------
     h.append("<br>");
+    h.append("<br>");
     const input = yaju1919.appendInputText(h,{
         placeholder: "暗号化 or 復元したい文章をここに入力してください。",
         width: "50%",
@@ -93,13 +95,13 @@
         return false;
     });
     h.append("<br>");
-    h.append("<br>");
-    h.append("<br>結果　");
+    h.append("結果　");
     appendBtn("コピー", () => {
         yaju1919.copy(result_elm.text().trim());
     });
     const result_elm = $("<div>").appendTo(h).css({
-        backgroundColor: "pink"
+        backgroundColor: "lightblue",
+        color: "blue"
     });
     const result = text => {
         result_elm.empty();
