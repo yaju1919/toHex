@@ -53,6 +53,7 @@
         title: "半角スペースを挿入する",
         value: true
     });
+    h_opt.append("<br>");
     const input_key = yaju1919.appendInputNumber(h_opt,{
         title: "暗号化キー",
         width: "5em",
@@ -61,6 +62,7 @@
         value: 0,
         int: true
     });
+    h_opt.append("<br>");
     const reverse_flag = yaju1919.appendCheckButton(h_opt,{
         title: "反転処理",
         change: f => f ? h_rev.show() : h_rev.hide()
@@ -74,9 +76,9 @@
         value: 2,
         int: true
     });
-    h_opt.children().each(e=>$(e).append("<br>"));
     //------------------------------------------------------------------------------------------------
     //------------------------------------------------------------------------------------------------
+    h.append("<br>");
     const input = yaju1919.appendInputText(h,{
         placeholder: "暗号化 or 復元したい文章をここに入力してください。",
         width: "50%",
