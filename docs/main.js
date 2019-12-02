@@ -50,6 +50,22 @@
         result(decode(v,input_key()));
     });
     h.append("<br>");
+    const message_elm = $("<div>").appendTo(h);
+    const message = str => message_elm.text(str + '(' + yaju1919.getTime() + ')');
+    const input = yaju1919.appendInputText(h,{
+        placeholder: "暗号化 or 復元したい文章をここに入力してください。",
+        width: "50%",
+        textarea: true,
+    });
+    textarea().css({
+        height: "6em",
+    }).focus(function(){ // フォーカス時全選択
+        $(this).select();
+    }).click(function(){
+        $(this).select();
+        return false;
+    });
+    h.append("<br>");
     h.append("オプション機能<br>");
     const space_flag = yaju1919.appendCheckButton(h,{
         title: "半角スペースを挿入する",
@@ -79,28 +95,14 @@
         int: true
     });
     h.append("<br>");
-    const message_elm = $("<div>").appendTo(h);
-    const message = str => message_elm.text(str + '(' + yaju1919.getTime() + ')');
-    const input = yaju1919.appendInputText(h,{
-        placeholder: "暗号化 or 復元したい文章をここに入力してください。",
-        width: "50%",
-        textarea: true,
-    });
-    textarea().css({
-        height: "30%",
-    }).focus(function(){ // フォーカス時全選択
-        $(this).select();
-    }).click(function(){
-        $(this).select();
-        return false;
-    });
     h.append("<br>");
     h.append("<br>結果　");
     appendBtn("コピー", () => {
-        yaju1919.copy(result_elm.val().trim());
+        yaju1919.copy(result_elm.text().trim());
     });
     const result_elm = $("<div>").appendTo(h);
     const result = text => {
+        result_elm.empty();
         text.split('\n').map(e=>{
             result_elm.append(e);
             result_elm.append("<br>");
