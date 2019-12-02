@@ -99,11 +99,13 @@
     appendBtn("コピー", () => {
         yaju1919.copy(result_elm.text().trim());
     });
+    const show_length = $("<span>").appendTo(h);
     const result_elm = $("<div>").appendTo(h).css({
         backgroundColor: "lightblue",
         color: "blue"
     });
     const result = text => {
+        show_length.text(`　文字数：${text.length}`);
         result_elm.empty();
         text.split('\n').map(e=>{
             result_elm.append(e+'\n');
