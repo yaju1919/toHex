@@ -24,72 +24,87 @@
 
     const overflow = n => (BIG_NUMBER + n) % OVERFLOW_NUMBER;
 
-    let input_key, input_reverse, reverse_flag, space_flag;
-
     const isHex = v => !/[^0-9A-Fa-f ]/.test(v); // 16進数かどうか
 
-    const setConfig = say => {
-        const h = $("<div>");
-        const textarea = () => h.find("textarea");
-        //------------------------------------------------------------------------------------------------
-        const encode_flag = yaju1919.appendCheckButton(h,{
-            title: "暗号化",
-            value: true
+
+    const h = $("<div>").appendTo($("body")).css({
+        padding: "1em"
+    });
+    $("<h1>",{text:"文字列を16進数に暗号化"}).appendTo(h);
+    const textarea = () => h.find("textarea");
+    //------------------------------------------------------------------------------------------------
+    const appendBtn = (title, func) => $("<button>",{text: title}).appendTo(h).click(func);
+    (()=>{
+        if(!navigator.clipboard) return;
+        if(!navigator.clipboard.readText) return;
+        appendBtn("貼り付け", () => navigator.clipboard.readText().then(text=>textarea().val(text)));
+    })();
+    appendBtn("暗号化", () => {
+        const v = input().trim();
+        if(isHex(v)) return message("これ以上暗号化できません");
+        result(encode(v,input_key()));
+    });
+    appendBtn("復元", () => {
+        const v = input().trim();
+        if(!isHex(v)) return message("既に復元されています");
+        result(decode(v,input_key()));
+    });
+    h.append("<br>");
+    h.append("オプション機能<br>");
+    const space_flag = yaju1919.appendCheckButton(h,{
+        title: "半角スペースを挿入する",
+        value: true
+    });
+    h.append("<br>");
+    const input_key = yaju1919.appendInputNumber(h,{
+        title: "暗号化キー",
+        width: "5em",
+        max: BIG_NUMBER,
+        min: -BIG_NUMBER,
+        value: 0,
+        int: true
+    });
+    h.append("<br>");
+    const reverse_flag = yaju1919.appendCheckButton(h,{
+        title: "反転処理",
+        change: f => f ? h_rev.show() : h_rev.hide()
+    });
+    const h_rev = $("<span>").appendTo(h).hide();
+    const input_reverse = yaju1919.appendInputNumber(h_rev,{
+        title: "反転キー",
+        width: "5em",
+        max: 1000,
+        min: 2,
+        value: 2,
+        int: true
+    });
+    h.append("<br>");
+    const message_elm = $("<div>").appendTo(h);
+    const message = str => message_elm.text(str + '(' + yaju1919.getTime() + ')');
+    const input = yaju1919.appendInputText(h,{
+        placeholder: "暗号化 or 復元したい文章をここに入力してください。",
+        width: "50%",
+        textarea: true,
+    });
+    textarea().css({
+        height: "30%",
+    }).focus(function(){ // フォーカス時全選択
+        $(this).select();
+    }).click(function(){
+        $(this).select();
+        return false;
+    });
+    h.append("<br>");
+    h.append("<br>結果　");
+    appendBtn("コピー", () => {
+        yaju1919.copy(result_elm.val().trim());
+    });
+    const result_elm = $("<div>").appendTo(h);
+    const result = text => {
+        text.split('\n').map(e=>{
+            result_elm.append(e);
+            result_elm.append("<br>");
         });
-        const appendBtn = (title, func) => $("<button>",{text: title}).appendTo(h).click(func);
-        const convert_btn = appendBtn("変換", () => {
-            if(encode_flag()){ // 暗号化
-                const v = input().trim();
-                if(isHex(v)) return message("これ以上暗号化できません");
-                textarea().val(encode(v,input_key()));
-            }
-            else{ // 復元
-                const v = input().trim();
-                if(!isHex(v)) return message("既に復元されています");
-                textarea().val(decode(v,input_key()));
-            }
-        });
-        appendBtn("コピー", () => {
-            yaju1919.copy(input().trim());
-        });
-        h.append("<br>");
-        input_key = yaju1919.appendInputNumber(h,{
-            title: "暗号化キー",
-            width: "5em",
-            max: BIG_NUMBER,
-            min: -BIG_NUMBER,
-            value: 0,
-            int: true
-        });
-        space_flag = yaju1919.appendCheckButton(h,{
-            title: "空白挿入",
-            value: true
-        });
-        h.append("<br>");
-        input_reverse = yaju1919.appendInputNumber(h,{
-            title: "反転キー",
-            width: "5em",
-            max: 1000,
-            min: 2,
-            value: 2,
-            int: true
-        });
-        reverse_flag = yaju1919.appendCheckButton(h,{
-            title: "反転"
-        });
-        h.append("<br>");
-        const message_elm = $("<div>").appendTo(h);
-        const message = str => message_elm.text(str + '(' + yaju1919.getTime() + ')');
-        const input = yaju1919.appendInputText(h,{
-            placeholder: "文字列入力欄",
-            width: "90%",
-            textarea: true,
-            enter: () => {
-                textarea().height((textarea().val().split('\n').length + 2) + "em");
-            }
-        });
-        //------------------------------------------------------------------------------------------------
-        return h;
-    };
-    setConfig().appendTo($("body"));
+    }
+    //------------------------------------------------------------------------------------------------
 })();
