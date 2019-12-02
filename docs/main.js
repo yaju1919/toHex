@@ -85,6 +85,7 @@
         placeholder: "暗号化 or 復元したい文章をここに入力してください。",
         width: "50%",
         textarea: true,
+        hankaku: false
     });
     textarea().css({
         height: "6em",
