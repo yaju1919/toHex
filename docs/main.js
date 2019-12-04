@@ -3,7 +3,7 @@
     const yaju1919 = yaju1919_library;
     const unit = 4; // 単位文字数
     const shape0 = (n,str) => ("0".repeat(n) + str).slice(-n).toUpperCase(); // strを左から0詰めでn文字に整形
-    const encode = (str, key = 0) => insert_space(r(str.trim().replace(/(.|\n)/g, c => shape0(unit,String(Number(c.charCodeAt(0)) + key).toString(16).slice(-unit)))));
+    const encode = (str, key = 0) => insert_space(r(str.trim().replace(/(.|\n)/g, c => shape0(unit,(Number(c.charCodeAt(0)) + key).toString(16).slice(-unit)))));
     const decode = (str, key = 0) => r(str.replace(/[^0-9A-Fa-f]/g,"")).replace(new RegExp("[0-9A-Fa-f]{" + unit + "}", "g"), n => String.fromCharCode(parseInt(n, 16) - key));
 
     const reverse = str => str.split('').reverse().join(''); // 文字列の反転
