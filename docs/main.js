@@ -110,23 +110,11 @@
         backgroundColor: "lightblue",
         color: "blue"
     });
-    const escapeHTML = str => {
-        if (typeof str !== 'string') return str;
-        const ptn = {
-            '<' : '&lt;' ,
-            '>' : '&gt;' ,
-            '&' : '&amp;' ,
-            '"' : '&quot;' ,
-            '\'' : '&#x27;' ,
-            '`' : '&#x60;'
-        };
-        return str.replace(/[<>&"\\`]/g, m => ptn[m]);
-    }
     let result_log = "";
     const result = text => {
         if(text) result_log = text;
         show_length.text(`　文字数：${text.length}`);
-        result_elm.text(escapeHTML(text));
+        result_elm.text(text);
     }
     //------------------------------------------------------------------------------------------------
 })();
