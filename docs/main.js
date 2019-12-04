@@ -103,20 +103,30 @@
     h.append("<br>");
     h.append("▼結果　");
     appendBtn("コピー", () => {
-        yaju1919.copy(result_elm.text().trim());
+        if(result_log) yaju1919.copy(result_log);
     });
     const show_length = $("<span>").appendTo(h);
-    const result_elm = $("<div>").appendTo(h).css({
+    const result_elm = $("<pre>").appendTo(h).css({
         backgroundColor: "lightblue",
         color: "blue"
     });
+    const escapeHTML = str => {
+        if (typeof str !== 'string') return str;
+        const ptn = {
+            '<' : '&lt;' ,
+            '>' : '&gt;' ,
+            '&' : '&amp;' ,
+            '"' : '&quot;' ,
+            '\'' : '&#x27;' ,
+            '`' : '&#x60;'
+        };
+        return str.replace(/[<>&"\\`]/g, m => ptn[m]);
+    }
+    let result_log = "";
     const result = text => {
+        if(text) result_log = text;
         show_length.text(`　文字数：${text.length}`);
-        result_elm.empty();
-        text.split('\n').map(e=>{
-            result_elm.append(e+'\n');
-            result_elm.append("<br>");
-        });
+        result_elm.text(escapeHTML(text));
     }
     //------------------------------------------------------------------------------------------------
 })();
