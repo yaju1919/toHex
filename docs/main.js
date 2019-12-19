@@ -20,6 +20,7 @@
     }
 
     const h = $("<div>").appendTo($("body")).css({
+        "text-align": "center",
         padding: "1em"
     });
     $("<h1>",{text:"文字列を16進数に暗号化"}).appendTo(h);
