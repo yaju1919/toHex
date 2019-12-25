@@ -42,6 +42,7 @@
     const textarea = () => h.find("textarea");
     //------------------------------------------------------------------------------------------------
     const appendBtn = (title, func) => $("<button>",{text: title}).appendTo(h).click(func);
+    h.append("<br>");
     (()=>{
         if(!navigator.clipboard) return;
         if(!navigator.clipboard.readText) return;
