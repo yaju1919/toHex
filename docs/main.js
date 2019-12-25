@@ -47,6 +47,24 @@
         if(!navigator.clipboard.readText) return;
         appendBtn("貼り付け", () => navigator.clipboard.readText().then(text=>textarea().val(text)));
     })();
+    h.append("<br>");
+    h.append("<br>");
+    const input = yaju1919.appendInputText(h,{
+        placeholder: "暗号化 or 復元したい文章をここに入力してください。",
+        width: "50%",
+        textarea: true,
+        hankaku: false
+    });
+    textarea().css({
+        height: "6em",
+    }).focus(function(){ // フォーカス時全選択
+        $(this).select();
+    }).click(function(){
+        $(this).select();
+        return false;
+    });
+    h.append("<br>");
+    h.append("<br>");
     appendBtn("暗号化", () => result(encode(input(),input_key())));
     const btn = appendBtn("復元", () => result(decode(input(),input_key())));
     h.append("<br>");
@@ -86,21 +104,6 @@
     });
     //------------------------------------------------------------------------------------------------
     //------------------------------------------------------------------------------------------------
-    h.append("<br>");
-    const input = yaju1919.appendInputText(h,{
-        placeholder: "暗号化 or 復元したい文章をここに入力してください。",
-        width: "50%",
-        textarea: true,
-        hankaku: false
-    });
-    textarea().css({
-        height: "6em",
-    }).focus(function(){ // フォーカス時全選択
-        $(this).select();
-    }).click(function(){
-        $(this).select();
-        return false;
-    });
     h.append("<br>");
     h.append("▼結果　");
     appendBtn("コピー", () => {
