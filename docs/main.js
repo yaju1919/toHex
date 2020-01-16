@@ -6,7 +6,7 @@
     }
     function encode(str, key){
         if(!key) key = 0;
-        return insert_space(r(str.replace(/(.|\n)/g, function c(){
+        return insert_space(r(str.replace(/(.|\n)/g, function(c){
             return shape0(unit,(Number(c.charCodeAt(0)) + key).toString(16).slice(-unit));
         })));
     }
