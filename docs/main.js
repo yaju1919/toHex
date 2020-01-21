@@ -72,7 +72,8 @@
         placeholder: "暗号化 or 復元したい文章をここに入力してください。",
         textarea: true,
         hankaku: false,
-        id: "input"
+        id: "input",
+        save: "input"
     });
     $("#input").focus(function(){ // フォーカス時全選択
         $(this).select();
@@ -90,42 +91,43 @@
     });
     h.append("<br>");
     h.append("<br>");
-    yaju1919.addInputBool(h,{
+    yaju1919.addHideArea(h,{
         title: "オプション機能",
-        change: function(f){
-            f ? h_opt.show() : h_opt.hide();
-        }
+        id2: "opt",
+        save: "opt"
     });
+    var h_opt = $("#opt");
     h.append("<br>");
     //------------------------------------------------------------------------------------------------
     //------------------------------------------------------------------------------------------------
-    var h_opt = $("<div>").appendTo(h).hide();
     var space_flag = yaju1919.addInputBool(h_opt,{
         title: "半角スペースを挿入する",
-        value: true
+        value: true,
+        save: "space"
     });
     h_opt.append("<br>");
     var input_key = yaju1919.addInputNumber(h_opt,{
         title: "暗号化キー",
         width: "5em",
         value: 0,
-        int: true
+        int: true,
+        save: "key"
     });
     h_opt.append("<br>");
-   var reverse_flag = yaju1919.addInputBool(h_opt,{
+   var reverse_flag = yaju1919.addHideArea(h_opt,{
         title: "反転処理",
-        change: function(f){
-            f ? h_rev.show() : h_rev.hide();
-        }
+        id2: "rev",
+        save: "rev"
     });
-    var h_rev = $("<span>").appendTo(h_opt).hide();
+    var h_rev = $("#rev");
     var input_reverse = yaju1919.addInputNumber(h_rev,{
         title: "反転キー",
         width: "5em",
         max: 1000,
         min: 2,
         value: 2,
-        int: true
+        int: true,
+        save: "rev_key"
     });
     //------------------------------------------------------------------------------------------------
     //------------------------------------------------------------------------------------------------
