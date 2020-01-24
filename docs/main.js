@@ -108,7 +108,6 @@
     h_opt.append("<br>");
     var input_key = yaju1919.addInputNumber(h_opt,{
         title: "暗号化キー",
-        width: "5em",
         value: 0,
         int: true,
         save: "key"
@@ -122,7 +121,6 @@
     var h_rev = $("#rev");
     var input_reverse = yaju1919.addInputNumber(h_rev,{
         title: "反転キー",
-        width: "5em",
         max: 1000,
         min: 2,
         value: 2,
@@ -137,14 +135,14 @@
         if(result_log) yaju1919.copy(result_log);
     });
     var show_length = $("<span>").appendTo(h);
-    var result_elm = $("<pre>").appendTo(h).css({
+    var result_elm = $("<div>").appendTo(h).css({
         backgroundColor: "lightblue",
         color: "blue"
     });
     var result_log = "";
     function result(text){
         if(text) result_log = text;
-        show_length.text(`　文字数：${text.length}`);
+        show_length.text("　文字数：" + text.length);
         result_elm.text(text);
     }
     //------------------------------------------------------------------------------------------------
