@@ -22,7 +22,9 @@
     function r(str){if(!reverse_flag() || !str.length) return str;
         var n = input_reverse();
         if(isNaN(n) || n < 2) return str;
-        return str.match(new RegExp('.{1,' + n + '}', "g")).map(v=>reverse(v)).join('');
+        return str.match(new RegExp('.{1,' + n + '}', "g")).map(function(v){
+            return reverse(v);
+        }).join('');
     }
 
     function insert_space(str){
