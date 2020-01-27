@@ -2,7 +2,7 @@
     'use strict';
     var unit = 4; // 単位文字数
     function shape0(n,str){ // strを左から0詰めでn文字に整形
-        return ("0".repeat(n) + str).slice(-n).toUpperCase();
+        return (yaju1919.repeat('0',n) + str).slice(-n).toUpperCase();
     }
     function encode(str, key){
         if(!key) key = 0;
