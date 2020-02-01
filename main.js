@@ -142,7 +142,7 @@
         show_length.text("　文字数：" + text.length);
         yaju1919.addInputText(result_elm.empty(),{
             title: "output",
-            value: result,
+            value: text,
             readonly: true,
             textarea: true
         })
