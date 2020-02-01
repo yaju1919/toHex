@@ -20,12 +20,12 @@
         return str.split('').reverse().join('');
     }
     function r(str){if(!reverse_flag() || !str.length) return str;
-        var n = input_reverse();
-        if(isNaN(n) || n < 2) return str;
-        return str.match(new RegExp('.{1,' + n + '}', "g")).map(function(v){
-            return reverse(v);
-        }).join('');
-    }
+                    var n = input_reverse();
+                    if(isNaN(n) || n < 2) return str;
+                    return str.match(new RegExp('.{1,' + n + '}', "g")).map(function(v){
+                        return reverse(v);
+                    }).join('');
+                   }
 
     function insert_space(str){
         if(!space_flag()) return str;
@@ -115,7 +115,7 @@
         save: "key"
     });
     h_opt.append("<br>");
-   var reverse_flag = yaju1919.addHideArea(h_opt,{
+    var reverse_flag = yaju1919.addHideArea(h_opt,{
         title: "反転処理",
         id2: "rev",
         save: "rev"
@@ -133,19 +133,18 @@
     //------------------------------------------------------------------------------------------------
     h.append("<br>");
     h.append("▼結果　");
-    appendBtn("コピー", function(){
-        if(result_log) yaju1919.copy(result_log);
-    });
     var show_length = $("<span>").appendTo(h);
-    var result_elm = $("<div>").appendTo(h).css({
-        backgroundColor: "lightblue",
-        color: "blue"
-    });
+    var result_elm = $("<div>").appendTo(h);
     var result_log = "";
     function result(text){
         if(text) result_log = text;
         show_length.text("　文字数：" + text.length);
-        result_elm.text(text);
+        yaju1919.addInputText(result_elm.empty(),{
+            title: "output",
+            value: result,
+            readonly: true,
+            textarea: true
+        })
     }
     //------------------------------------------------------------------------------------------------
 })();
